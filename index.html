@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAgSol | Advanced Agricultural Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #81c784;
+            --secondary: #0277bd;
+            --dark: #263238;
+            --light: #f5f7fa;
+            --accent: #ff8f00;
+            --text: #333;
+            --text-light: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 15px;
+            text-align: center;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background: #e65100;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 0 10px;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(32px, 4vw, 42px);
+            color: var(--dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.7;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 28px;
+            color: var(--dark);
+            z-index: 101;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 16px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-left: 5px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+        
+        nav ul li:hover > a i {
+            transform: rotate(180deg);
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            width: 220px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        nav ul li:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu li {
+            margin: 0;
+            padding: 0 15px;
+        }
+        
+        .dropdown-menu li a {
+            padding: 10px 0;
+            color: var(--text);
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+        }
+        
+        .dropdown-menu li:last-child a {
+            border-bottom: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 120px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px);
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            line-height: 1.3;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: clamp(18px, 2.5vw, 22px);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #f0f0f0;
+            padding: 0 20px;
+            line-height: 1.7;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stats-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--primary);
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .feature-card:hover:before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-it-works:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.03;
+            z-index: 0;
+        }
+        
+        .steps-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover .step-number {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .step p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        /* Scientific Data Section */
+        .scientific-data {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .data-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .data-card {
+            background: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .data-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .data-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .data-card:hover .data-image img {
+            transform: scale(1.1);
+        }
+        
+        .data-content {
+            padding: 25px;
+        }
+        
+        .data-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .data-content p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .data-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Crops Section */
+        .crops {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .crop-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .crop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        
+        .crop-card {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .crop-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .crop-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .crop-card:hover .crop-icon {
+            transform: scale(1.2);
+        }
+        
+        .crop-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .crop-card p {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .testimonial-slider {
+            max-width: 1000px;
+            margin: 50px auto 0;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 0 15px;
+            position: relative;
+            border: 1px solid #eee;
+        }
+        
+        .testimonial-slide:before {
+            content: '"';
+            font-size: 100px;
+            color: var(--primary-light);
+            opacity: 0.2;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            line-height: 1;
+            font-family: serif;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 25px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-light);
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 14px;
+        }
+        
+        .slick-dots {
+            bottom: -50px;
+        }
+        
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: var(--primary-light);
+        }
+        
+        .slick-dots li.slick-active button:before {
+            color: var(--primary);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .cta-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: clamp(32px, 4vw, 42px);
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: clamp(16px, 2.5vw, 18px);
+            padding: 0 20px;
+            line-height: 1.7;
+        }
+        
+        .cta-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 25px 20px;
+        }
+        
+        .member-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .member-info p {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-social a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .member-social a:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Publications Section */
+        .publications {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .pub-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        
+        .pub-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pub-item {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .pub-item:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
+        }
+        
+        .pub-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .pub-item .authors {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .pub-item .journal {
+            font-style: italic;
+            color: var(--primary);
+            font-size: 15px;
+        }
+        
+        .pub-item .year {
+            display: inline-block;
+            background: var(--primary-light);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 25px;
+            font-size: 18px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            color: #bbb;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact p i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: translateY(50px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .modal-body {
+            padding: 40px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-body h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .modal-body p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .header-container {
+                padding: 0 30px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            section {
+                padding: 70px 0;
+            }
+            
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .features-grid, .steps {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                background: white;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+                height: 100vh;
+                overflow-y: auto;
+                z-index: 999;
+                padding: 80px 30px 30px;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+            
+            nav ul li a {
+                padding: 10px 0;
+                border-bottom: 1px solid #eee;
+                width: 100%;
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                padding: 10px 0 0 15px;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .cta-form {
+                padding: 30px 20px;
+            }
+            
+            .modal-body {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-card, .step, .data-card, .team-member {
+                padding: 20px;
+            }
+            
+            .testimonial-slide {
+                padding: 30px 20px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="https://via.placeholder.com/40x40?text=UAg" alt="UAgSol">
+                UAg<span>Sol</span>
+            </a>
+            <div class="menu-toggle" id="menuToggle">☰</div>
+            <nav id="nav">
+                <ul>
+                    <li>
+                        <a href="#features">Benefits <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#features">Yield Increase</a></li>
+                            <li><a href="#features">Soil Health</a></li>
+                            <li><a href="#features">Water Efficiency</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#how-it-works">Science <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#how-it-works">Technology</a></li>
+                            <li><a href="#scientific-data">Research</a></li>
+                            <li><a href="#publications">Publications</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#crops">Crops <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#crops">Grains</a></li>
+                            <li><a href="#crops">Fruits</a></li>
+                            <li><a href="#crops">Vegetables</a></li>
+                            <li><a href="#crops">Specialty Crops</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Revolutionizing Agriculture Through Science</h1>
+                <p>UAgSol develops advanced microbial solutions that increase crop yields while reducing environmental impact.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Request Demo</a>
+                    <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="stats-container fade-in delay-1">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">+15-30%</div>
+                            <div class="stat-label">Yield Increase</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">-40%</div>
+                            <div class="stat-label">Water Usage</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Organic</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Farms Using</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Transform Your Agricultural Outcomes</h2>
+                <p>Our proprietary microbial formulations deliver measurable improvements across all key agricultural metrics</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Increased Yields</h3>
+                    <p>Demonstrated 15-30% yield improvements across multiple crop types through enhanced nutrient uptake and plant health.</p>
+                </div>
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Water Efficiency</h3>
+                    <p>Our solutions reduce water requirements by up to 40% through improved root systems and soil moisture retention.</p>
+                </div>
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Soil Regeneration</h3>
+                    <p>Rebuilds soil microbiome, increases organic matter, and restores degraded farmland to productive use.</p>
+                </div>
+                <div class="feature-card fade-in delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <h3>Chemical Reduction</h3>
+                    <p>Decreases dependence on synthetic fertilizers and pesticides while maintaining or improving outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container steps-container">
+            <div class="section-title">
+                <h2>Our Scientific Approach</h2>
+                <p>UAgSol's technology harnesses the power of naturally occurring soil microbes to enhance plant growth and resilience</p>
+            </div>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>Microbe Selection</h3>
+                    <p>We isolate and identify beneficial microbes from high-performance agricultural environments worldwide.</p>
+                </div>
+                <div class="step fade-in delay-1">
+                    <div class="step-number">2</div>
+                    <h3>Strain Optimization</h3>
+                    <p>Through advanced biotechnology, we enhance natural microbial traits for maximum agricultural benefit.</p>
+                </div>
+                <div class="step fade-in delay-2">
+                    <div class="step-number">3</div>
+                    <h3>Formulation</h3>
+                    <p>We develop stable, effective microbial consortia tailored to specific crops and growing conditions.</p>
+                </div>
+                <div class="step fade-in delay-3">
+                    <div class="step-number">4</div>
+                    <h3>Field Application</h3>
+                    <p>Easy-to-use products integrate seamlessly with existing farming practices at competitive costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientific Data Section -->
+    <section class="scientific-data" id="scientific-data">
+        <div class="container">
+            <div class="section-title">
+                <h2>Peer-Reviewed Results</h2>
+                <p>Our technology has been validated through rigorous scientific studies and field trials</p>
+            </div>
+            <div class="data-container">
+                <div class="data-card fade-in">
+                    <div class="data-image">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Field Trials">
+                    </div>
+                    <div class="data-content">
+                        <h3>Corn Yield Improvement</h3>
+                        <p>3-year study showing 22% average yield increase with reduced fertilizer inputs across 15 Midwest farms.</p>
+                        <div class="data-meta">
+                            <span>Journal of Agricultural Science</span>
+                            <span>2022</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-card fade-in delay-1">
+                    <div class="data-image">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Soil Analysis">
+                    </div>
+                    <div class="data-content">
+                        <h3>Soil Health Metrics</h3>
+                        <p>Significant improvements in organic matter, water retention, and microbial diversity in treated soils.</p>
+                        <div class="data-meta">
+                            <span>Nature Sustainability</span>
+                            <span>2021</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="data-card fade-in delay-2">
+                    <div class="data-image">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Water Study">
+                    </div>
+                    <div class="data-content">
+                        <h3>Water Use Efficiency</h3>
+                        <p>38% reduction in irrigation requirements for tomatoes with maintained yield and quality in California trials.</p>
+                        <div class="data-meta">
+                            <span>Agricultural Water Management</span>
+                            <span>2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crops Section -->
+    <section class="crops" id="crops">
+        <div class="container">
+            <div class="section-title">
+                <h2>Optimized for Your Crops</h2>
+                <p>We offer specialized formulations tailored to different crop categories and growing conditions</p>
+            </div>
+            <div class="crop-filter">
+                <button class="filter-btn active" data-filter="all">All Crops</button>
+                <button class="filter-btn" data-filter="grains">Grains</button>
+                <button class="filter-btn" data-filter="fruits">Fruits</button>
+                <button class="filter-btn" data-filter="vegetables">Vegetables</button>
+                <button class="filter-btn" data-filter="specialty">Specialty</button>
+            </div>
+            <div class="crop-grid">
+                <div class="crop-card" data-category="grains">
+                    <div class="crop-icon">
+                        <i class="fas fa-wheat"></i>
+                    </div>
+                    <h3>Wheat</h3>
+                    <p>+18% yield</p>
+                </div>
+                <div class="crop-card" data-category="grains">
+                    <div class="crop-icon">
+                        <i class="fas fa-corn"></i>
+                    </div>
+                    <h3>Corn</h3>
+                    <p>+22% yield</p>
+                </div>
+                <div class="crop-card" data-category="grains">
+                    <div class="crop-icon">
+                        <i class="fas fa-rice"></i>
+                    </div>
+                    <h3>Rice</h3>
+                    <p>+15% yield</p>
+                </div>
+                <div class="crop-card" data-category="fruits">
+                    <div class="crop-icon">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                    <h3>Apples</h3>
+                    <p>+20% yield</p>
+                </div>
+                <div class="crop-card" data-category="fruits">
+                    <div class="crop-icon">
+                        <i class="fas fa-grapes"></i>
+                    </div>
+                    <h3>Grapes</h3>
+                    <p>+25% yield</p>
+                </div>
+                <div class="crop-card" data-category="vegetables">
+                    <div class="crop-icon">
+                        <i class="fas fa-carrot"></i>
+                    </div>
+                    <h3>Carrots</h3>
+                    <p>+28% yield</p>
+                </div>
+                <div class="crop-card" data-category="vegetables">
+                    <div class="crop-icon">
+                        <i class="fas fa-pepper-hot"></i>
+                    </div>
+                    <h3>Peppers</h3>
+                    <p>+30% yield</p>
+                </div>
+                <div class="crop-card" data-category="specialty">
+                    <div class="crop-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>Coffee</h3>
+                    <p>+17% yield</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Farmers Say</h2>
+            <p>Hear from agricultural producers who have implemented our solutions</p>
+        </div>
+        <div class="testimonial-slider">
+            <div class="testimonial-slide">
+                <div class="testimonial-content">
+                    "After using UAgSol's microbial treatment for two seasons, we've seen a consistent 20% increase in wheat yields while reducing our fertilizer costs by 15%. The science behind their products is sound and the results speak for themselves."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Peterson" class="author-avatar">
+                    <div class="author-info">
+                        <h4>John Peterson</h4>
+                        <p>Wheat Farmer, Kansas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <div class="testimonial-content">
+                    "As an organic vegetable producer, finding solutions that meet certification requirements while improving productivity is challenging. UAgSol's products have helped us increase tomato yields by 25% while maintaining our organic status."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Gonzalez" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Maria Gonzalez</h4>
+                        <p>Organic Farm Manager, California</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-slide">
+                <div class="testimonial-content">
+                    "The water savings alone made UAgSol's products worth the investment. In our arid region, the 35% reduction in irrigation needs while maintaining almond production has been transformative for our operation's sustainability."
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Robert Chen" class="author-avatar">
+                    <div class="author-info">
+                        <h4>Robert Chen</h4>
+                        <p>Orchard Owner, Arizona</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Scientific Team</h2>
+                <p>World-class researchers and agricultural experts driving innovation</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member fade-in">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Dr. Sarah Johnson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Yvonne Johnson</h3>
+                        <p>Chief Scientific Officer</p>
+                        <p>PhD in Microbiology, 20+ years in agricultural research</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fas fa-file-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member fade-in delay-1">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Michael Rodriguez">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Yvon Rodriguez</h3>
+                        <p>Director of Field Applications</p>
+                        <p>PhD in Agronomy, former extension specialist</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fas fa-file-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member fade-in delay-2">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Dr. Priya Patel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Yvette Patel</h3>
+                        <p>Lead Microbiologist</p>
+                        <p>PhD in Microbial Ecology, soil microbiome expert</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fas fa-file-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member fade-in delay-3">
+                    <div class="member-image">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="James Wilson">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ukwishaka Wilson</h3>
+                        <p>Commercial Director</p>
+                        <p>Agricultural economics, global market development</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                            <a href="#"><i class="fas fa-file-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <div class="section-title">
+                <h2>Research Publications</h2>
+                <p>Our peer-reviewed scientific contributions to agricultural science</p>
+            </div>
+            <div class="pub-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="microbiology">Microbiology</button>
+                <button class="filter-btn" data-filter="agronomy">Agronomy</button>
+                <button class="filter-btn" data-filter="sustainability">Sustainability</button>
+            </div>
+            <div class="pub-list">
+                <div class="pub-item" data-category="microbiology">
+                    <h3>Enhanced Nitrogen Fixation in Wheat Through Microbial Consortia</h3>
+                    <p class="authors">Johnson, S., Patel, P., et al.</p>
+                    <p class="journal">Applied and Environmental Microbiology</p>
+                    <span class="year">2023</span>
+                </div>
+                <div class="pub-item" data-category="agronomy">
+                    <h3>Field Evaluation of Microbial Amendments for Drought Resistance in Maize</h3>
+                    <p class="authors">Rodriguez, M., Johnson, S., et al.</p>
+                    <p class="journal">Agronomy Journal</p>
+                    <span class="year">2022</span>
+                </div>
+                <div class="pub-item" data-category="sustainability">
+                    <h3>Reducing Agricultural Water Use Through Microbial Soil Amendments</h3>
+                    <p class="authors">Patel, P., Wilson, J., et al.</p>
+                    <p class="journal">Nature Sustainability</p>
+                    <span class="year">2021</span>
+                </div>
+                <div class="pub-item" data-category="microbiology">
+                    <h3>Long-term Soil Microbial Community Changes Following Treatment</h3>
+                    <p class="authors">Johnson, S., Chen, L., et al.</p>
+                    <p class="journal">Soil Biology and Biochemistry</p>
+                    <span class="year">2020</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="container cta-container">
+            <h2 class="fade-in">Ready to Transform Your Farm?</h2>
+            <p class="fade-in delay-1">Contact our agricultural specialists to discuss how our solutions can work for your specific crops and conditions.</p>
+            <div class="cta-form fade-in delay-2">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="farm">Farm Type/Size</label>
+                        <input type="text" id="farm" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="crops">Primary Crops</label>
+                        <input type="text" id="crops" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">How Can We Help?</label>
+                        <textarea id="message" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-accent" style="width: 100%;">Request Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>UAgSol</h3>
+                    <p>Advanced microbial solutions for sustainable agriculture that increase yields while reducing environmental impact.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#features"><i class="fas fa-chevron-right"></i> Benefits</a></li>
+                        <li><a href="#how-it-works"><i class="fas fa-chevron-right"></i> Science</a></li>
+                        <li><a href="#crops"><i class="fas fa-chevron-right"></i> Crops</a></li>
+                        <li><a href="#team"><i class="fas fa-chevron-right"></i> Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Grain Solutions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Fruit Solutions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Vegetable Solutions</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Specialty Crops</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Custom Formulations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> 3209 Folkways blvd, Lincoln, NE United States 68504</p>
+                        <p><i class="fas fa-phone-alt"></i> +1 402 840 2231</p>
+                        <p><i class="fas fa-envelope"></i> info@UAgSol.com</p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 am - 05:00 pm</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 UAgSol. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            menuToggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#nav ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    nav.classList.remove('active');
+                    menuToggle.textContent = '☰';
+                }
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Testimonial slider
+        $(document).ready(function(){
+            $('.testimonial-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                adaptiveHeight: true,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                arrows: false
+            });
+        });
+        
+        // Filter functionality for crops
+        const filterBtns = document.querySelectorAll('.crop-filter .filter-btn');
+        const cropCards = document.querySelectorAll('.crop-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                cropCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Filter functionality for publications
+        const pubFilterBtns = document.querySelectorAll('.pub-filter .filter-btn');
+        const pubItems = document.querySelectorAll('.pub-item');
+        
+        pubFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                pubFilterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                pubItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Here you would typically send the form data to a server
+            alert('Thank you for your message! Our team will contact you shortly.');
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Initialize elements as invisible
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+    </script>
+</body>
+</html>
